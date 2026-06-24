@@ -19,7 +19,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-export const db = new Pool({ connectionString: process.env.DATABASE_URL })
+export const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
+})
 
 export const ROLES = { ADMIN: "admin", USER: "user", EDITOR: "editor" }
 
